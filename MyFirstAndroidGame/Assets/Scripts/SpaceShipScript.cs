@@ -3,9 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShipScript : MonoBehaviour
+public class SpaceShipScript : MonoBehaviour, ITouchable
 {
+    
     Vector3 acceleration, velocity;
+    public void OnDrag(Ray collidingRay)
+    {
+        throw new System.NotImplementedException();
+    }
+    public void OnTap(Ray collidingRay)
+    {
+        print("SpaceShip tapped code here");
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,4 +42,6 @@ public class SpaceShipScript : MonoBehaviour
     {
         GetComponent<Renderer>().material.color = newColor;
     }
+
+    
 }
