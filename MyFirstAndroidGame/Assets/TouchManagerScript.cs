@@ -5,7 +5,7 @@ using UnityEngine;
 public class TouchManagerScript : MonoBehaviour
 {
     private float timer;
-
+    bool touchMoved;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +25,21 @@ public class TouchManagerScript : MonoBehaviour
             {
                 case TouchPhase.Began:
                     timer = 0f;
-
+                    touchMoved = false;
                     break;
                 case TouchPhase.Stationary:
                     break;
                 case TouchPhase.Moved:
+                    // boolean
+                    touchMoved = true;
+                    print("touchMoved is true");
                     break;
                 case TouchPhase.Ended:
-                    if (timer <= 0.5f)
+                    print("TouchPhase is Ended");
+                    touchMoved = false;
+                    if ((timer >= 0.5f) && !touchMoved)
                     {
+                        print("Rays");
                         Ray myRay1 = Camera.main.ScreenPointToRay(myFirstTouch.position);
                         RaycastHit hitObj;
                         Physics.Raycast(myRay1, out hitObj);
@@ -42,8 +48,6 @@ public class TouchManagerScript : MonoBehaviour
                     }
                     break;
             }
-        
-            
 
             Ray myRay = Camera.main.ScreenPointToRay(myFirstTouch.position);
             Debug.DrawRay(myRay.origin, 15 * myRay.direction);
